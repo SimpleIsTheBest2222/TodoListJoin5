@@ -14,7 +14,8 @@ public class InMemoryTodoRepository implements TodoRepository {
     private static long idSequence = 1;
 
     @Override
-    public Todo save(Todo todo) {
+    public Todo save(String content, int priority) {
+        Todo todo = new Todo(idSequence++, content, priority);
         storage.add(todo);
         return todo;
     }
@@ -55,10 +56,5 @@ public class InMemoryTodoRepository implements TodoRepository {
     @Override
     public boolean deleteById(long id) {
         return storage.removeIf(t -> t.getId() == id);
-    }
-
-    // Todo 생성 시 ID 부여용 - Service에서 호출
-    public long nextId() {
-        return idSequence++;
     }
 }
