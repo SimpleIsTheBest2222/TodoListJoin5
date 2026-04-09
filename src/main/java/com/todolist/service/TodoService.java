@@ -3,6 +3,7 @@ package com.todolist.service;
 import com.todolist.common.CustomException;
 import com.todolist.common.ErrorCode;
 import com.todolist.domain.Todo;
+import com.todolist.domain.TodoCreateRequest;
 import com.todolist.domain.TodoStatus;
 import com.todolist.repository.TodoRepository;
 
@@ -25,7 +26,7 @@ public class TodoService {
             throw new CustomException(ErrorCode.INVALID_INPUT);
         }
         Todo todo = new Todo(0, content, priority); // ID는 Repository가 부여
-        return todoRepository.save(content, priority);
+        return todoRepository.save(new TodoCreateRequest(content, priority));
     }
 
     // 전체 조회
