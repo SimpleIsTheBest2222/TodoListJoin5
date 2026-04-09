@@ -1,6 +1,7 @@
 package com.todolist.repository;
 
 import com.todolist.domain.Todo;
+import com.todolist.domain.TodoCreateRequest;
 import com.todolist.domain.TodoStatus;
 
 import java.util.ArrayList;
@@ -14,8 +15,8 @@ public class InMemoryTodoRepository implements TodoRepository {
     private static long idSequence = 1;
 
     @Override
-    public Todo save(String content, int priority) {
-        Todo todo = new Todo(idSequence++, content, priority);
+    public Todo save(TodoCreateRequest request) {
+        Todo todo = new Todo(idSequence++, request.getContent(), request.getPriority());
         storage.add(todo);
         return todo;
     }
